@@ -1,71 +1,86 @@
-# SachCheck 🔍
+# SachCheck 🔎
 
-**Don't just forward. Verify.**
+### Don't just forward. Verify.
 
-SachCheck is a retrieval-augmented verification tool for forwarded messages. Paste a message or upload a screenshot, and it extracts the core claim, searches the web, reads source-page content, and returns a cautious **True / False / Misleading / Unverified** result with an explanation in the original language.
+SachCheck is an AI-powered fact-verification tool that helps users check claims shared through WhatsApp forwards, social media posts, screenshots, and other online messages.
 
-## Architecture
+Instead of simply asking an AI model whether something is true, SachCheck retrieves relevant information from the web, reads the underlying source pages, compares the claim against the retrieved evidence, and produces an evidence-grounded verdict.
+
+> **SachCheck does not claim to know "the truth." It verifies a claim against retrieved evidence and returns `Unverified` when the available evidence is insufficient.**
+
+---
+
+## 🚨 The Problem
+
+Misleading information spreads quickly through:
+
+- WhatsApp forwards
+- Social media posts
+- Screenshots
+- Viral messages
+- Health claims
+- Fake offers and announcements
+
+Most people don't have the time to manually search multiple websites and read several source articles just to verify one forwarded message.
+
+The problem is not only finding information — it is **connecting a specific claim to reliable evidence**.
+
+---
+
+## 💡 Our Solution
+
+SachCheck turns a forwarded message into an evidence-based verification report.
+
+### The user can:
+
+1. Paste a forwarded message
+2. Upload a screenshot
+3. Let SachCheck extract the core factual claim
+4. Search the web for supporting or contradicting evidence
+5. Fetch and read relevant source pages
+6. Compare the claim against the retrieved evidence
+7. Receive a clear verdict with an explanation and source links
+
+### Verdicts
+
+| Verdict | Meaning |
+|---|---|
+| 🟢 **True** | Retrieved evidence supports the claim |
+| 🔴 **False** | Retrieved evidence contradicts the claim |
+| 🟠 **Misleading** | The claim contains some truth but presents it inaccurately or without important context |
+| ⚪ **Unverified** | Available evidence is insufficient to make a reliable determination |
+
+---
+
+## ⚙️ How SachCheck Works
 
 ```text
-Forward (text or screenshot)
-        ↓
-Language detection + claim extraction
-        ↓
-Web search (Serper)
-        ↓
-Fetch + clean top source pages
-        ↓
-Evidence-grounded verdict + explanation
-        ↓
-Verdict + citations
-```
-
-SachCheck does not claim to tell “the truth.” It helps users verify claims using retrieved evidence and favors **Unverified** when evidence is insufficient.
-
-## Tech stack
-
-- React + Vite + Tailwind CSS
-- Node.js + Express
-- Gemini Flash (configured with `GEMINI_MODEL`)
-- Serper.dev Search API
-- Cheerio for source-page text extraction
-- Gemini multimodal input for screenshots
-- No database, authentication, or persistence in the MVP
-
-## Run locally
-
-### Server
-
-```bash
-cd server
-npm install
-cp .env.example .env
-# add GEMINI_API_KEY and SERPER_KEY
-npm run dev
-```
-
-### Client
-
-```bash
-cd client
-npm install
-npm run dev
-```
-
-Open `http://localhost:5173`.
-
-The Vite development server proxies `/api` requests to `http://localhost:5000`.
-
-## Environment
-
-```env
-GEMINI_API_KEY=
-GEMINI_MODEL=gemini-3.5-flash
-SERPER_KEY=
-PORT=5000
-FRONTEND_ORIGIN=http://localhost:5173
-```
-
-> Model IDs can change over time. If the configured model is unavailable in your Gemini account, set `GEMINI_MODEL` to a currently available Flash model without changing the application code.
-
-## Built for Hack Devengers 2.0
+┌─────────────────────┐
+│  Forward / Screenshot│
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Claim Extraction    │
+│ + Language Detection│
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Web Search          │
+│ Serper Search API   │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Source Retrieval    │
+│ Fetch + Clean Pages │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Evidence Analysis   │
+│ Gemini              │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Verification Report │
+│ Verdict + Evidence  │
+│ + Sources           │
+└─────────────────────┘
