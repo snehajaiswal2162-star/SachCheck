@@ -1,86 +1,98 @@
-# SachCheck 🔎
+# 🛡️ SachCheck
 
 ### Don't just forward. Verify.
 
-SachCheck is an AI-powered fact-verification tool that helps users check claims shared through WhatsApp forwards, social media posts, screenshots, and other online messages.
+SachCheck is an AI-powered claim verification system that helps users verify suspicious forwarded messages, social-media claims, and online information using real web evidence.
 
-Instead of simply asking an AI model whether something is true, SachCheck retrieves relevant information from the web, reads the underlying source pages, compares the claim against the retrieved evidence, and produces an evidence-grounded verdict.
+Instead of simply asking an AI model whether a claim is true, SachCheck searches the web, retrieves relevant source pages, extracts evidence, and then uses AI to reason against that evidence.
 
-> **SachCheck does not claim to know "the truth." It verifies a claim against retrieved evidence and returns `Unverified` when the available evidence is insufficient.**
-
----
-
-## 🚨 The Problem
-
-Misleading information spreads quickly through:
-
-- WhatsApp forwards
-- Social media posts
-- Screenshots
-- Viral messages
-- Health claims
-- Fake offers and announcements
-
-Most people don't have the time to manually search multiple websites and read several source articles just to verify one forwarded message.
-
-The problem is not only finding information — it is **connecting a specific claim to reliable evidence**.
+If there is not enough reliable evidence, SachCheck can return **Unverified** instead of guessing.
 
 ---
 
-## 💡 Our Solution
+## 🚀 Live Demo
 
-SachCheck turns a forwarded message into an evidence-based verification report.
+https://sachcheck-client-7ple.onrender.com/
 
-### The user can:
+---
+
+## 💡 Problem
+
+People receive thousands of forwarded messages through WhatsApp, Instagram, Telegram, Facebook, and other platforms.
+
+These messages may contain:
+
+- Fake offers
+- Misleading health information
+- Fake announcements
+- Financial scams
+- False educational claims
+- Fabricated information
+- Clickbait
+- Misleading statistics
+- "Forward this to 10 people" messages
+
+Manually verifying these claims requires opening multiple websites, reading articles, comparing information, and deciding whether the available evidence actually supports the claim.
+
+SachCheck simplifies this process into a single verification workflow.
+
+---
+
+## 💡 Solution
+
+SachCheck allows users to:
 
 1. Paste a forwarded message
 2. Upload a screenshot
-3. Let SachCheck extract the core factual claim
-4. Search the web for supporting or contradicting evidence
-5. Fetch and read relevant source pages
-6. Compare the claim against the retrieved evidence
-7. Receive a clear verdict with an explanation and source links
-
-### Verdicts
-
-| Verdict | Meaning |
-|---|---|
-| 🟢 **True** | Retrieved evidence supports the claim |
-| 🔴 **False** | Retrieved evidence contradicts the claim |
-| 🟠 **Misleading** | The claim contains some truth but presents it inaccurately or without important context |
-| ⚪ **Unverified** | Available evidence is insufficient to make a reliable determination |
+3. Detect and understand the input language
+4. Extract the core factual claim
+5. Search the web for relevant information
+6. Retrieve actual source pages
+7. Extract relevant evidence
+8. Analyze the evidence using AI
+9. Generate a verification verdict
+10. Explain the result
+11. Display the sources used for verification
 
 ---
 
-## ⚙️ How SachCheck Works
+## 🔄 How SachCheck Works
 
 ```text
-┌─────────────────────┐
-│  Forward / Screenshot│
-└──────────┬──────────┘
-           ↓
-┌─────────────────────┐
-│ Claim Extraction    │
-│ + Language Detection│
-└──────────┬──────────┘
-           ↓
-┌─────────────────────┐
-│ Web Search          │
-│ Serper Search API   │
-└──────────┬──────────┘
-           ↓
-┌─────────────────────┐
-│ Source Retrieval    │
-│ Fetch + Clean Pages │
-└──────────┬──────────┘
-           ↓
-┌─────────────────────┐
-│ Evidence Analysis   │
-│ Gemini              │
-└──────────┬──────────┘
-           ↓
-┌─────────────────────┐
-│ Verification Report │
-│ Verdict + Evidence  │
-│ + Sources           │
-└─────────────────────┘
+User Input
+    │
+    ├── Paste Text
+    │
+    └── Upload Screenshot
+            │
+            ▼
+    Language Detection
+            │
+            ▼
+      Claim Extraction
+            │
+            ▼
+       Web Searching
+            │
+            ▼
+    Source Page Retrieval
+            │
+            ▼
+      Evidence Extraction
+            │
+            ▼
+     Evidence-Grounded AI
+            │
+            ▼
+         Verdict
+            │
+            ├── True
+            ├── False
+            ├── Misleading
+            └── Unverified
+            │
+            ▼
+   Explanation + Evidence
+            │
+            ▼
+        Source Links
